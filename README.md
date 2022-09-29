@@ -9,4 +9,4 @@ In project over course, we create a rental of starships.
 
 
 ******
-The project created over PyRest course (author of course: Kacper Sieradziński || [GitHub - Kacpers](https://github.com/Kacpers) / [Main page - DoKodu.it](https://dokodu.it">DoKodu.it))
+The project created over PyRest course (author of course: Kacper Sieradziński || [GitHub - Kacpers](https://github.com/Kacpers) / [Main page - DoKodu.it](https://dokodu.it">DoKodu.it)
