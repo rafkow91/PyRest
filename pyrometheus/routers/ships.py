@@ -10,7 +10,11 @@ ships = []
 
 
 class ShipSchema(BaseModel):
+    id: int
     name: str
+    max_speed: float
+    distance: float
+    cost_per_day: float
 
     def __str__(self) -> str:
         return self.name
