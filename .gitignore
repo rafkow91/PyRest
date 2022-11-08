@@ -132,3 +132,4 @@ dmypy.json
 notes.*
 .idea
 .vscode
+postgres-data/
