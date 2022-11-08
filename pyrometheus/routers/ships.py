@@ -1,5 +1,7 @@
 from fastapi import APIRouter, HTTPException
-from pydantic import BaseModel
+
+from pyrometheus.schemas.ships import ShipSchema
+
 
 router = APIRouter(
     prefix='/ships',
@@ -7,17 +9,6 @@ router = APIRouter(
 )
 
 ships = []
-
-
-class ShipSchema(BaseModel):
-    id: int
-    name: str
-    max_speed: float
-    distance: float
-    cost_per_day: float
-
-    def __str__(self) -> str:
-        return self.name
 
 
 @router.get('/')

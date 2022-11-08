@@ -1,20 +1,12 @@
-from datetime import date
-from pydantic import BaseModel
 from fastapi import APIRouter
-from typing import Optional
+
+from pyrometheus.schemas.bookings import BookingSchema
+
 
 router = APIRouter(
     prefix='/bookings',
     tags=['bookings']
 )
-
-
-class BookingSchema(BaseModel):
-    id: Optional[int]
-    spaceship_id: int
-    customer_id: int
-    date_start: date
-    date_end: date
 
 
 @router.get('/')

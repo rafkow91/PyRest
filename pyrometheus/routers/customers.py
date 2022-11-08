@@ -1,20 +1,12 @@
-from datetime import date
-from pydantic import BaseModel
 from fastapi import APIRouter
-from typing import Optional
+
+from pyrometheus.schemas.customers import CustomerSchema
+
 
 router = APIRouter(
     prefix='/customers',
     tags=['customers']
 )
-
-
-class CustomerSchema(BaseModel):
-    id: Optional[int]
-    name: str
-    address: str
-    document_number: str
-
 
 
 @router.get('/')
