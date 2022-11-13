@@ -1,5 +1,9 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Depends
 
+from sqlalchemy.orm import Session
+
+from pyrometheus.database import get_db
+from pyrometheus.repositories.ships import create
 from pyrometheus.schemas.ships import ShipSchema
 
 
@@ -38,8 +42,14 @@ async def update(ship_id: int, ship: ShipSchema):
 
 
 @router.post('/', status_code=201)
-async def add(ship: ShipSchema):
-    ships.append(ship)
+async def add(ship: ShipSchema, db: Session = Depends(get_db)):
+    create(
+        db=db,
+        name=ship.name,
+        max_speed=ship.max_speed,
+        distance=ship.distance,
+        cost_per_day=ship.cost_per_day,
+    )
 
     return ships
 
