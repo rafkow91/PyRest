@@ -26,7 +26,7 @@ async def get_by_page(page: int = None, limit: int = None, db: Session = Depends
         return fetch_all(db=db)
     return fetch_by_page(db=db, page=page, ships_by_page=limit)
 
- 
+
 @router.get('/{ship_id}')
 async def get(ship_id: int, db: Session = Depends(get_db)):
     return fetch_one(db=db, ship_id=ship_id)
@@ -56,11 +56,4 @@ async def add(ship: ShipSchema, db: Session = Depends(get_db)):
         cost_per_day=ship.cost_per_day,
     )
 
-    return ships
-
-
-def get_ship(ship_id: int) -> ShipSchema:
-    try:
-        return ships[ship_id]
-    except IndexError:
-        raise HTTPException(status_code=404, detail='This ship does\'t exist')
+    return []
