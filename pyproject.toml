@@ -10,6 +10,9 @@ python = "^3.10"
 fastapi = "^0.85.0"
 uvicorn = "^0.18.3"
 python-multipart = "^0.0.5"
+sqlalchemy = "^1.4.43"
+psycopg2-binary = "^2.9.5"
+alembic = "^1.8.1"
 
 
 [tool.poetry.group.dev.dependencies]

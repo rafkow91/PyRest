@@ -3,7 +3,14 @@ from fastapi import APIRouter, HTTPException, Depends
 from sqlalchemy.orm import Session
 
 from pyrometheus.database import get_db
-from pyrometheus.repositories.ships import create
+from pyrometheus.repositories.ships import (
+    create,
+    delete_one,
+    fetch_one,
+    fetch_by_page,
+    fetch_all,
+    update_by_id,
+)
 from pyrometheus.schemas.ships import ShipSchema
 
 
@@ -12,33 +19,31 @@ router = APIRouter(
     tags=['ships']
 )
 
-ships = []
-
 
 @router.get('/')
-async def index():
-    return ships
+async def get_by_page(page: int = None, limit: int = None, db: Session = Depends(get_db)):
+    if page is None or limit is None:
+        return fetch_all(db=db)
+    return fetch_by_page(db=db, page=page, ships_by_page=limit)
 
-
+ 
 @router.get('/{ship_id}')
-async def get(ship_id: int):
-    return get_ship(ship_id)
+async def get(ship_id: int, db: Session = Depends(get_db)):
+    return fetch_one(db=db, ship_id=ship_id)
 
 
 @router.delete('/{ship_id}')
-async def delete(ship_id: int):
-    get_ship(ship_id)
-    del ships[ship_id]
-
-    return ships
+async def delete(ship_id: int, db: Session = Depends(get_db)):
+    return delete_one(db=db, ship_id=ship_id)
 
 
 @router.put('/{ship_id}')
-async def update(ship_id: int, ship: ShipSchema):
-    get_ship(ship_id)
-    ships[ship_id] = ship
-
-    return ships
+async def update(ship_id: int, ship: ShipSchema, db: Session = Depends(get_db)):
+    return update_by_id(
+        db=db,
+        ship_id=ship_id,
+        **ship.dict()
+    )
 
 
 @router.post('/', status_code=201)
