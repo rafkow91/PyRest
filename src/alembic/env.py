@@ -1,3 +1,4 @@
+from os import environ
 from logging.config import fileConfig
 
 from sqlalchemy import engine_from_config
@@ -72,6 +73,16 @@ def run_migrations_online() -> None:
         with context.begin_transaction():
             context.run_migrations()
 
+def get_connection_string():
+    db_user = environ.get('POSTGRES_USER')
+    db_password = environ.get('POSTGRES_PASSWORD')
+    db_host = environ.get('POSTGRES_HOST')
+    db_port = environ.get('POSTGRES_PORT')
+    db_database = environ.get('POSTGRES_DB')
+
+    return f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_database}'
+
+config.set_main_option('sqlalchemy.url', get_connection_string())
 
 if context.is_offline_mode():
     run_migrations_offline()
