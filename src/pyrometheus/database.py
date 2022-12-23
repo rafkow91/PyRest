@@ -7,6 +7,7 @@ from sqlalchemy import create_engine
 def get_db(request: Request):
     return request.state.db
 
+
 db_user = environ.get('POSTGRES_USER')
 db_password = environ.get('POSTGRES_PASSWORD')
 db_host = environ.get('POSTGRES_HOST')

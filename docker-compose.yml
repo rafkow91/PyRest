@@ -22,9 +22,3 @@ services:
       - postgres
     links:
       - postgres
-    
-      
-
-
-networks:
-  db: {}

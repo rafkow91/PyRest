@@ -3,7 +3,6 @@ name = "pyrometheus"
 version = "0.1.0"
 description = "A rental of spaceships"
 authors = ["Rafał Kowalski <rafkow91@yahoo.com>"]
-readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.10"

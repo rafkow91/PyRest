@@ -4,6 +4,7 @@ RUN mkdir /src
 
 COPY /src /src
 RUN apt-get update
+RUN apt-get install -y postgresql-client
 
 WORKDIR /src
 

@@ -73,6 +73,7 @@ def run_migrations_online() -> None:
         with context.begin_transaction():
             context.run_migrations()
 
+
 def get_connection_string():
     db_user = environ.get('POSTGRES_USER')
     db_password = environ.get('POSTGRES_PASSWORD')
@@ -81,6 +82,7 @@ def get_connection_string():
     db_database = environ.get('POSTGRES_DB')
 
     return f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_database}'
+
 
 config.set_main_option('sqlalchemy.url', get_connection_string())
 
