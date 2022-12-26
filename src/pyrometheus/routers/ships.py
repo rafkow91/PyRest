@@ -1,4 +1,5 @@
 from fastapi import APIRouter, HTTPException, Depends
+from fastapi.security import OAuth2PasswordBearer
 
 from sqlalchemy.orm import Session
 
@@ -19,9 +20,11 @@ router = APIRouter(
     tags=['ships']
 )
 
+oauth2_schema = OAuth2PasswordBearer(tokenUrl='login')
 
 @router.get('/')
-async def get_by_page(page: int = None, limit: int = None, db: Session = Depends(get_db)):
+async def get_by_page(page: int = None, limit: int = None, db: Session = Depends(get_db), token: str = Depends(oauth2_schema)):
+    print(token)
     if page is None or limit is None:
         return fetch_all(db=db)
     return fetch_by_page(db=db, page=page, ships_by_page=limit)
